@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-#import "GBCommandLineParser.h"
-#import "GBOptionsHelper.h"
 #import "GBSettings.h"
+#import "GBOptionsHelper.h"
+#import "GBCommandLineParser.h"
