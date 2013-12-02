@@ -9,10 +9,16 @@
 /* Begin PBXBuildFile section */
 		73484A011511FD010031EF85 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73484A001511FD010031EF85 /* Foundation.framework */; };
 		73484A041511FD010031EF85 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 73484A031511FD010031EF85 /* main.m */; };
-		73484A1B1511FDA90031EF85 /* GBCommandLineParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 73484A161511FDA90031EF85 /* GBCommandLineParser.m */; };
-		73484A1C1511FDA90031EF85 /* GBOptionsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 73484A181511FDA90031EF85 /* GBOptionsHelper.m */; };
-		73484A1D1511FDA90031EF85 /* GBSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 73484A1A1511FDA90031EF85 /* GBSettings.m */; };
 		73484A201511FE9E0031EF85 /* GBSettings+Application.m in Sources */ = {isa = PBXBuildFile; fileRef = 73484A1F1511FE9E0031EF85 /* GBSettings+Application.m */; };
+		D39E8869184D164600E16A87 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D39E8868184D164600E16A87 /* Cocoa.framework */; };
+		D39E8873184D164600E16A87 /* libgbcli.m in Sources */ = {isa = PBXBuildFile; fileRef = D39E8872184D164600E16A87 /* libgbcli.m */; };
+		D39E888D184D167900E16A87 /* GBCommandLineParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 73484A161511FDA90031EF85 /* GBCommandLineParser.m */; };
+		D39E888E184D167D00E16A87 /* GBOptionsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 73484A181511FDA90031EF85 /* GBOptionsHelper.m */; };
+		D39E888F184D168200E16A87 /* GBSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 73484A1A1511FDA90031EF85 /* GBSettings.m */; };
+		D39E8890184D169C00E16A87 /* GBCommandLineParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 73484A151511FDA90031EF85 /* GBCommandLineParser.h */; };
+		D39E8891184D16A000E16A87 /* GBOptionsHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 73484A171511FDA90031EF85 /* GBOptionsHelper.h */; };
+		D39E8892184D16A500E16A87 /* GBSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 73484A191511FDA90031EF85 /* GBSettings.h */; };
+		D39E8893184D173700E16A87 /* liblibgbcli.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D39E8867184D164600E16A87 /* liblibgbcli.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,6 +46,15 @@
 		73484A1A1511FDA90031EF85 /* GBSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBSettings.m; sourceTree = "<group>"; };
 		73484A1E1511FE9E0031EF85 /* GBSettings+Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GBSettings+Application.h"; sourceTree = "<group>"; };
 		73484A1F1511FE9E0031EF85 /* GBSettings+Application.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GBSettings+Application.m"; sourceTree = "<group>"; };
+		D39E8867184D164600E16A87 /* liblibgbcli.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibgbcli.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D39E8868184D164600E16A87 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		D39E886B184D164600E16A87 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D39E886C184D164600E16A87 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		D39E886D184D164600E16A87 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		D39E8870184D164600E16A87 /* libgbcli-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "libgbcli-Prefix.pch"; sourceTree = "<group>"; };
+		D39E8871184D164600E16A87 /* libgbcli.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libgbcli.h; sourceTree = "<group>"; };
+		D39E8872184D164600E16A87 /* libgbcli.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = libgbcli.m; sourceTree = "<group>"; };
+		D39E8879184D164600E16A87 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,7 +62,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D39E8893184D173700E16A87 /* liblibgbcli.a in Frameworks */,
 				73484A011511FD010031EF85 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D39E8864184D164600E16A87 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D39E8869184D164600E16A87 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				73484A021511FD010031EF85 /* GBCli */,
+				D39E886E184D164600E16A87 /* libgbcli */,
 				734849FF1511FD010031EF85 /* Frameworks */,
 				734849FD1511FD010031EF85 /* Products */,
 			);
@@ -67,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				734849FC1511FD010031EF85 /* GBCli */,
+				D39E8867184D164600E16A87 /* liblibgbcli.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -75,6 +101,9 @@
 			isa = PBXGroup;
 			children = (
 				73484A001511FD010031EF85 /* Foundation.framework */,
+				D39E8868184D164600E16A87 /* Cocoa.framework */,
+				D39E8879184D164600E16A87 /* XCTest.framework */,
+				D39E886A184D164600E16A87 /* Other Frameworks */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -121,7 +150,48 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		D39E886A184D164600E16A87 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D39E886B184D164600E16A87 /* Foundation.framework */,
+				D39E886C184D164600E16A87 /* CoreData.framework */,
+				D39E886D184D164600E16A87 /* AppKit.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		D39E886E184D164600E16A87 /* libgbcli */ = {
+			isa = PBXGroup;
+			children = (
+				D39E8871184D164600E16A87 /* libgbcli.h */,
+				D39E8872184D164600E16A87 /* libgbcli.m */,
+				D39E886F184D164600E16A87 /* Supporting Files */,
+			);
+			path = libgbcli;
+			sourceTree = "<group>";
+		};
+		D39E886F184D164600E16A87 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D39E8870184D164600E16A87 /* libgbcli-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D39E8865184D164600E16A87 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D39E8892184D16A500E16A87 /* GBSettings.h in Headers */,
+				D39E8891184D16A000E16A87 /* GBOptionsHelper.h in Headers */,
+				D39E8890184D169C00E16A87 /* GBCommandLineParser.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		734849FB1511FD010031EF85 /* GBCli */ = {
@@ -140,6 +210,23 @@
 			productName = GBCli;
 			productReference = 734849FC1511FD010031EF85 /* GBCli */;
 			productType = "com.apple.product-type.tool";
+		};
+		D39E8866184D164600E16A87 /* libgbcli */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D39E888B184D164600E16A87 /* Build configuration list for PBXNativeTarget "libgbcli" */;
+			buildPhases = (
+				D39E8863184D164600E16A87 /* Sources */,
+				D39E8864184D164600E16A87 /* Frameworks */,
+				D39E8865184D164600E16A87 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = libgbcli;
+			productName = libgbcli;
+			productReference = D39E8867184D164600E16A87 /* liblibgbcli.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
@@ -162,6 +249,7 @@
 			projectRoot = "";
 			targets = (
 				734849FB1511FD010031EF85 /* GBCli */,
+				D39E8866184D164600E16A87 /* libgbcli */,
 			);
 		};
 /* End PBXProject section */
@@ -172,10 +260,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				73484A041511FD010031EF85 /* main.m in Sources */,
-				73484A1B1511FDA90031EF85 /* GBCommandLineParser.m in Sources */,
-				73484A1C1511FDA90031EF85 /* GBOptionsHelper.m in Sources */,
-				73484A1D1511FDA90031EF85 /* GBSettings.m in Sources */,
 				73484A201511FE9E0031EF85 /* GBSettings+Application.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D39E8863184D164600E16A87 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D39E888F184D168200E16A87 /* GBSettings.m in Sources */,
+				D39E888E184D167D00E16A87 /* GBOptionsHelper.m in Sources */,
+				D39E888D184D167900E16A87 /* GBCommandLineParser.m in Sources */,
+				D39E8873184D164600E16A87 /* libgbcli.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,6 +343,59 @@
 			};
 			name = Release;
 		};
+		D39E8887184D164600E16A87 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "libgbcli/libgbcli-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D39E8888184D164600E16A87 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "libgbcli/libgbcli-Prefix.pch";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -267,6 +416,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		D39E888B184D164600E16A87 /* Build configuration list for PBXNativeTarget "libgbcli" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D39E8887184D164600E16A87 /* Debug */,
+				D39E8888184D164600E16A87 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
