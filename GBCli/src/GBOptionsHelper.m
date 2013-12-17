@@ -240,15 +240,26 @@
 				[rows removeLastObject];
 				[rows removeLastObject];
 			}
-			[rows addObject:[NSArray array]];
+      if (rows.count > 0) {
+        [rows addObject:[NSArray array]];
+      }
 			[rows addObject:[NSArray arrayWithObject:definition.description]];
 			lastSeparatorIndex = rows.count;
 			return;
 		}
 		
 		// Prepare option description.
-		NSString *shortOption = (definition.shortOption > 0) ? [NSString stringWithFormat:@"-%c", definition.shortOption] : @"  ";
-		NSString *longOption = [NSString stringWithFormat:@"--%@", definition.longOption];
+		NSString *shortOption = @"   ";
+		NSString *longOption = @"";
+
+    if (definition.shortOption > 0) {
+      shortOption = [NSString stringWithFormat:@"-%c%@", definition.shortOption, (definition.longOption && definition.longOption.length > 0) ? @"," : @" "];
+    }
+
+    if (definition.longOption && definition.longOption.length > 0) {
+      longOption = [NSString stringWithFormat:@"--%@", definition.longOption];
+    }
+
 		NSString *description = definition.description;
 		NSUInteger requirements = [self requirements:definition];
 		

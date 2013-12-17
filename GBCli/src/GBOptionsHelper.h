@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+#if defined(__cplusplus)
+#define UNSAFE_UNRETAINED
+#import <type_traits>
+#else
+#define UNSAFE_UNRETAINED __unsafe_unretained
+#endif
+
 @class GBCommandLineParser;
 @class GBSettings;
 
@@ -15,12 +22,33 @@
 typedef NSUInteger GBOptionFlags;
 
 /** Description of a single option or separator. */
-typedef struct {
+struct GBOptionDefinition {
 	char shortOption; ///< Short option char or `0` if not used.
-	__unsafe_unretained NSString *longOption; ///< Long option name - required for options.
-	__unsafe_unretained NSString *description; ///< Description of the option.
+	UNSAFE_UNRETAINED NSString *longOption; ///< Long option name - required for options.
+	UNSAFE_UNRETAINED NSString *description; ///< Description of the option.
 	GBOptionFlags flags; ///< Various flags.
-} GBOptionDefinition;
+
+#if defined(__cplusplus)
+  GBOptionDefinition(char _so=0, NSString*_lo=nil, NSString* _d=nil, GBOptionFlags _f=0) : shortOption(_so), longOption(_lo), description(_d), flags(_f) { }
+  GBOptionDefinition(const GBOptionDefinition& rs) : shortOption(rs.shortOption), longOption(rs.longOption), description(rs.description), flags(rs.flags) { }
+  GBOptionDefinition(GBOptionDefinition&& rs) : shortOption(std::move(rs.shortOption)), longOption(std::move(rs.longOption)), description(std::move(rs.description)), flags(std::move(rs.flags)) {
+    rs.shortOption = 0; rs.longOption = nil; rs.description = nil; rs.flags = 0;
+  }
+  GBOptionDefinition& operator=(const GBOptionDefinition& rs) {
+    shortOption = rs.shortOption; longOption = rs.longOption; description = rs.description; flags = rs.flags;
+    return *this;
+  }
+  GBOptionDefinition& operator=(GBOptionDefinition&& rs) {
+    shortOption = std::move(rs.shortOption); longOption = std::move(rs.longOption); description = std::move(rs.description); flags = std::move(rs.flags);
+    rs.shortOption = 0; rs.longOption = nil; rs.description = nil; rs.flags = 0;
+    return *this;
+  }
+  bool operator ==(const GBOptionDefinition& rs) const  { return this == &rs; }
+  bool operator !=(const GBOptionDefinition& rs) const  { return this != &rs; }
+  bool operator !() const                               { return !(longOption!=nil || description!=nil); }
+#endif
+};
+typedef struct GBOptionDefinition GBOptionDefinition;
 
 /** Block used to fetch strings from user code. */
 typedef NSString *(^GBOptionStringBlock)(void);
