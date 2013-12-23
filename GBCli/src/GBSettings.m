@@ -108,14 +108,12 @@ static NSString * const GBSettingsArgumentsKey = @"B450A340-EC4F-40EC-B18D-B52DB
 	}
 	[self setObject:value forLocalKey:key];
 }
-// Keyed subscripting
--(id)objectForKeyedSubscript:(id)key
-{
-    return [self objectForKey:key];
+
+- (id)objectForKeyedSubscript:(NSString *)key {
+  return [self objectForKey:key];
 }
-- (void)setObject:(id)obj forKeyedSubscript:(id)key
-{
-    [ self setObject:obj forKey:key];
+- (void)setObject:(id)obj forKeyedSubscript:(NSString *)key {
+  [self setObject:obj forKey:key];
 }
 
 - (BOOL)boolForKey:(NSString *)key {
@@ -153,8 +151,6 @@ static NSString * const GBSettingsArgumentsKey = @"B450A340-EC4F-40EC-B18D-B52DB
 	NSNumber *number = [NSNumber numberWithDouble:value];
 	[self setObject:number forKey:key];
 }
-
-
 
 #pragma mark - Arguments handling
 
@@ -224,6 +220,5 @@ GB_SYNTHESIZE_OBJECT(NSArray *, arguments, setArguments, GBSettingsArgumentsKey)
 - (BOOL)isKeyArray:(NSString *)key {
 	return [self.arrayKeys containsObject:key];
 }
-
 
 @end

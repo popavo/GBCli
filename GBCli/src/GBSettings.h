@@ -53,6 +53,9 @@
 - (id)objectForKey:(NSString *)key;
 - (void)setObject:(id)value forKey:(NSString *)key;
 
+- (id)objectForKeyedSubscript:(NSString *)key;
+- (void)setObject:(id)obj forKeyedSubscript:(NSString *)key;
+
 - (BOOL)boolForKey:(NSString *)key;
 - (void)setBool:(BOOL)value forKey:(NSString *)key;
 
@@ -90,8 +93,6 @@
 @property (nonatomic, readonly, copy) NSString *name;
 @property (nonatomic, readonly, strong) GBSettings *parent;
 
--(id)objectForKeyedSubscript:(id)key;
-- (void)setObject:(id)obj forKeyedSubscript:(id)key;
 @end
 
 #pragma mark - Convenience one-line synthesize macros for concrete properties
