@@ -90,6 +90,8 @@
 @property (nonatomic, readonly, copy) NSString *name;
 @property (nonatomic, readonly, strong) GBSettings *parent;
 
+-(id)objectForKeyedSubscript:(id)key;
+- (void)setObject:(id)obj forKeyedSubscript:(id)key;
 @end
 
 #pragma mark - Convenience one-line synthesize macros for concrete properties
