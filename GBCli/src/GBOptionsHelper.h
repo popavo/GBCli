@@ -43,9 +43,17 @@ struct GBOptionDefinition {
     rs.shortOption = 0; rs.longOption = nil; rs.description = nil; rs.flags = 0;
     return *this;
   }
-  bool operator ==(const GBOptionDefinition& rs) const  { return this == &rs; }
-  bool operator !=(const GBOptionDefinition& rs) const  { return this != &rs; }
-  bool operator !() const                               { return !(longOption!=nil || description!=nil); }
+  bool operator ==(const GBOptionDefinition& rs) const  {
+    if (!*this || !rs) return false;
+    bool so = (this->shortOption == rs.shortOption);
+    bool lo = (this->longOption && rs.longOption ? [this->longOption isEqualToString:rs.longOption] : (!this->longOption && !rs.longOption));
+    bool d = (this->description && rs.description ? [this->description isEqualToString:rs.description] : (!this->description && !rs.description));
+    bool f = (this->flags == rs.flags);
+    return this == &rs || (so && lo && d && f);
+  }
+  bool operator !=(const GBOptionDefinition& rs) const  { return !(*this == rs); }
+  bool operator !() const                               { return (!shortOption && !longOption); }
+
 #endif
 };
 typedef struct GBOptionDefinition GBOptionDefinition;
