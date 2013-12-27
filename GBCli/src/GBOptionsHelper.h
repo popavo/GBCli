@@ -30,29 +30,37 @@ struct GBOptionDefinition {
 
 #if defined(__cplusplus)
   GBOptionDefinition(char _so=0, NSString*_lo=nil, NSString* _d=nil, GBOptionFlags _f=0) : shortOption(_so), longOption(_lo), description(_d), flags(_f) { }
-  GBOptionDefinition(const GBOptionDefinition& rs) : shortOption(rs.shortOption), longOption(rs.longOption), description(rs.description), flags(rs.flags) { }
-  GBOptionDefinition(GBOptionDefinition&& rs) : shortOption(std::move(rs.shortOption)), longOption(std::move(rs.longOption)), description(std::move(rs.description)), flags(std::move(rs.flags)) {
-    rs.shortOption = 0; rs.longOption = nil; rs.description = nil; rs.flags = 0;
-  }
-  GBOptionDefinition& operator=(const GBOptionDefinition& rs) {
-    shortOption = rs.shortOption; longOption = rs.longOption; description = rs.description; flags = rs.flags;
-    return *this;
-  }
-  GBOptionDefinition& operator=(GBOptionDefinition&& rs) {
-    shortOption = std::move(rs.shortOption); longOption = std::move(rs.longOption); description = std::move(rs.description); flags = std::move(rs.flags);
-    rs.shortOption = 0; rs.longOption = nil; rs.description = nil; rs.flags = 0;
-    return *this;
-  }
+
+  GBOptionDefinition(const GBOptionDefinition& rs)                  { _copy(rs); }
+  GBOptionDefinition(GBOptionDefinition&& rs)                       { _move(std::move(rs)); rs.clear(); }
+
+  GBOptionDefinition& operator=(const GBOptionDefinition& rs)       { _copy(rs); return *this; }
+  GBOptionDefinition& operator=(GBOptionDefinition&& rs)            { _move(std::move(rs)); rs.clear(); return *this; }
+
+  void clear()                                                      { shortOption = 0; longOption = nil; description = nil; flags = 0; }
+
   bool operator ==(const GBOptionDefinition& rs) const  {
     if (!*this || !rs) return false;
-    bool so = (this->shortOption == rs.shortOption);
-    bool lo = (this->longOption && rs.longOption ? [this->longOption isEqualToString:rs.longOption] : (!this->longOption && !rs.longOption));
-    bool d = (this->description && rs.description ? [this->description isEqualToString:rs.description] : (!this->description && !rs.description));
-    bool f = (this->flags == rs.flags);
-    return this == &rs || (so && lo && d && f);
+    if (this == &rs) return true;
+    bool so = shortOption == rs.shortOption;
+    bool lo = (!longOption && !rs.longOption) || [longOption isEqualToString:rs.longOption];
+    bool d = (!description && !rs.description) || [description isEqualToString:rs.description];
+    bool f = flags == rs.flags;
+    return (so && lo && d && f);
   }
-  bool operator !=(const GBOptionDefinition& rs) const  { return !(*this == rs); }
-  bool operator !() const                               { return (!shortOption && !longOption); }
+
+  bool operator !=(const GBOptionDefinition& rs) const              { return !(*this == rs); }
+  bool operator !() const                                           { return (!shortOption && !longOption && !description); }
+
+private:
+  void _copy(const GBOptionDefinition& rs) {
+    shortOption = rs.shortOption; longOption = rs.longOption;
+    description = rs.description; flags = rs.flags;
+  }
+  void _move(GBOptionDefinition&& rs) {
+    shortOption = std::move(rs.shortOption); longOption = std::move(rs.longOption);
+    description = std::move(rs.description); flags = std::move(rs.flags);
+  }
 
 #endif
 };
