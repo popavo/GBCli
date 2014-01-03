@@ -10,30 +10,33 @@
 #import "GBCommandLineParser.h"
 #import "GBOptionsHelper.h"
 
-@interface OptionDefinition : NSObject
-@property (nonatomic, assign) char shortOption;
-@property (nonatomic, copy) NSString *longOption;
-@property (nonatomic, copy) NSString *description;
-@property (nonatomic, assign) GBOptionFlags flags;
-@end
-
-@implementation OptionDefinition
+@implementation GBOption
 @synthesize shortOption;
 @synthesize longOption;
 @synthesize description;
 @synthesize flags;
+
++ (GBOption*)optionWithDefinition:(GBOptionDefinition)definition {
+  GBOption* option = [[GBOption alloc] init];
+  option.shortOption = definition.shortOption;
+	option.longOption = definition.longOption;
+	option.description = definition.description;
+	option.flags = definition.flags;
+  return option;
+}
+
 @end
 
 #pragma mark - 
 
 @interface GBOptionsHelper ()
 - (void)replacePlaceholdersAndPrintStringFromBlock:(GBOptionStringBlock)block;
-- (void)enumerateOptions:(void(^)(OptionDefinition *definition, BOOL *stop))handler;
-- (NSUInteger)requirements:(OptionDefinition *)definition;
-- (BOOL)isSeparator:(OptionDefinition *)definition;
-- (BOOL)isCmdLine:(OptionDefinition *)definition;
-- (BOOL)isPrint:(OptionDefinition *)definition;
-- (BOOL)isHelp:(OptionDefinition *)definition;
+- (void)enumerateOptions:(void(^)(GBOption *definition, BOOL *stop))handler;
+- (NSUInteger)requirements:(GBOption *)definition;
+- (BOOL)isSeparator:(GBOption *)definition;
+- (BOOL)isCmdLine:(GBOption *)definition;
+- (BOOL)isPrint:(GBOption *)definition;
+- (BOOL)isHelp:(GBOption *)definition;
 @property (nonatomic, readonly) NSString *applicationNameFromBlockOrDefault;
 @property (nonatomic, readonly) NSString *applicationVersionFromBlockOrNil;
 @property (nonatomic, readonly) NSString *applicationBuildFromBlockOrNil;
@@ -80,7 +83,7 @@
 }
 	 
 - (void)registerOption:(char)shortName long:(NSString *)longName description:(NSString *)description flags:(GBOptionFlags)flags {
-	OptionDefinition *definition = [[OptionDefinition alloc] init];
+	GBOption *definition = [[GBOption alloc] init];
 	definition.shortOption = shortName;
 	definition.longOption = longName;
 	definition.description = description;
@@ -91,7 +94,7 @@
 #pragma mark - Integration with other components
 
 - (void)registerOptionsToCommandLineParser:(GBCommandLineParser *)parser {
-	[self enumerateOptions:^(OptionDefinition *definition, BOOL *stop) {
+	[self enumerateOptions:^(GBOption *definition, BOOL *stop) {
 		if ([self isSeparator:definition]) return;
 		if (![self isCmdLine:definition]) return;
 		NSUInteger requirements = [self requirements:definition];
@@ -126,7 +129,7 @@
 	
 	// Append all rows for options.
 	__block NSUInteger lastSeparatorIndex = 0;
-	[self enumerateOptions:^(OptionDefinition *definition, BOOL *stop) {
+	[self enumerateOptions:^(GBOption *definition, BOOL *stop) {
 		if (![blockSelf isPrint:definition]) return;
 		
 		// Add separator. Note that we don't care about its length, we'll simply draw it over the whole line if needed.
@@ -231,7 +234,7 @@
 	__block NSUInteger maxNameTypeLength = 0;
 	__block NSUInteger lastSeparatorIndex = NSNotFound;
 	NSMutableArray *rows = [NSMutableArray array];
-	[self enumerateOptions:^(OptionDefinition *definition, BOOL *stop) {
+	[self enumerateOptions:^(GBOption *definition, BOOL *stop) {
 		if (![self isHelp:definition]) return;
 		
 		// Prepare separator. Remove previous one if there were no values prepared for it.
@@ -343,29 +346,29 @@
 
 #pragma mark - Helper methods
 
-- (void)enumerateOptions:(void(^)(OptionDefinition *definition, BOOL *stop))handler {
-	[self.registeredOptions enumerateObjectsUsingBlock:^(OptionDefinition *definition, NSUInteger idx, BOOL *stop) {
+- (void)enumerateOptions:(void(^)(GBOption *definition, BOOL *stop))handler {
+	[self.registeredOptions enumerateObjectsUsingBlock:^(GBOption *definition, NSUInteger idx, BOOL *stop) {
 		handler(definition, stop);
 	}];
 }
 
-- (NSUInteger)requirements:(OptionDefinition *)definition {
+- (NSUInteger)requirements:(GBOption *)definition {
 	return (definition.flags & 0b11);
 }
 
-- (BOOL)isSeparator:(OptionDefinition *)definition {
+- (BOOL)isSeparator:(GBOption *)definition {
 	return ((definition.flags & GBOptionSeparator) > 0);
 }
 
-- (BOOL)isCmdLine:(OptionDefinition *)definition {
+- (BOOL)isCmdLine:(GBOption *)definition {
 	return ((definition.flags & GBOptionNoCmdLine) == 0);
 }
 
-- (BOOL)isPrint:(OptionDefinition *)definition {
+- (BOOL)isPrint:(GBOption *)definition {
 	return ((definition.flags & GBOptionNoPrint) == 0);
 }
 
-- (BOOL)isHelp:(OptionDefinition *)definition {
+- (BOOL)isHelp:(GBOption *)definition {
 	return ((definition.flags & GBOptionNoHelp) == 0);
 }
 

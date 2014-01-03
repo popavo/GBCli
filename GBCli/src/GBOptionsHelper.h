@@ -66,6 +66,17 @@ private:
 };
 typedef struct GBOptionDefinition GBOptionDefinition;
 
+@interface GBOption : NSObject
+
+@property (nonatomic, assign) char shortOption;
+@property (nonatomic, copy) NSString *longOption;
+@property (nonatomic, copy) NSString *description;
+@property (nonatomic, assign) GBOptionFlags flags;
+
++ (GBOption*)optionWithDefinition:(GBOptionDefinition)definition;
+
+@end
+
 /** Block used to fetch strings from user code. */
 typedef NSString *(^GBOptionStringBlock)(void);
 
