@@ -28,7 +28,7 @@ struct GBOptionDefinition {
 	UNSAFE_UNRETAINED NSString *description; ///< Description of the option.
 	GBOptionFlags flags; ///< Various flags.
 
-#if defined(__cplusplus)
+#if __cplusplus
   GBOptionDefinition(char _so=0, NSString*_lo=nil, NSString* _d=nil, GBOptionFlags _f=0) : shortOption(_so), longOption(_lo), description(_d), flags(_f) { }
 
   GBOptionDefinition(const GBOptionDefinition& rs)                  { _copy(rs); }
